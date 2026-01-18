@@ -1,3 +1,5 @@
+const API_BASE = "";
+
 let currentUser = null;
 
 // Load current user on page load

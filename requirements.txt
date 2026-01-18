@@ -2,3 +2,6 @@ fastapi>=0.110
 uvicorn[standard]>=0.27
 pydantic>=2.6
 email-validator>=2.1
+Pillow>=10.0
+python-dotenv>=1.0
+python-multipart>=0.0.5

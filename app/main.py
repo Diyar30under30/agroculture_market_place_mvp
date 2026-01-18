@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Iterator, Optional
 import os
 from dotenv import load_dotenv
+from io import BytesIO
+from PIL import Image
 
 from fastapi import FastAPI, HTTPException, Query, Request, Response, UploadFile, File
 from fastapi.responses import FileResponse, RedirectResponse
@@ -482,10 +484,50 @@ async def upload_product_photo(product_id: int, file: UploadFile = File(...)) ->
     if file.content_type not in allowed_types:
         raise HTTPException(status_code=400, detail="Only image files are allowed")
     
-    # Check file size (max 5MB)
+    # Read file contents
     contents = await file.read()
-    if len(contents) > 5 * 1024 * 1024:
-        raise HTTPException(status_code=400, detail="File too large (max 5MB)")
+    max_size = 5 * 1024 * 1024  # 5MB
+    
+    # Compress if larger than 5MB
+    if len(contents) > max_size:
+        try:
+            # Open image and compress
+            image = Image.open(BytesIO(contents))
+            
+            # Convert RGBA to RGB if needed (for JPEG compatibility)
+            if image.mode in ("RGBA", "LA", "P"):
+                rgb_image = Image.new("RGB", image.size, (255, 255, 255))
+                rgb_image.paste(image, mask=image.split()[-1] if image.mode in ("RGBA", "LA") else None)
+                image = rgb_image
+            
+            # Compress with decreasing quality until under 5MB
+            quality = 95
+            while quality > 10:
+                output = BytesIO()
+                image.save(output, format="JPEG", quality=quality, optimize=True)
+                compressed_data = output.getvalue()
+                
+                if len(compressed_data) <= max_size:
+                    contents = compressed_data
+                    break
+                
+                quality -= 10
+            
+            # If still too large, resize image
+            if len(contents) > max_size:
+                scale = 0.9
+                while len(contents) > max_size and scale > 0.3:
+                    new_size = (int(image.width * scale), int(image.height * scale))
+                    resized = image.resize(new_size, Image.Resampling.LANCZOS)
+                    
+                    output = BytesIO()
+                    resized.save(output, format="JPEG", quality=85, optimize=True)
+                    contents = output.getvalue()
+                    
+                    scale -= 0.1
+        except Exception as e:
+            # If compression fails, reject the file
+            raise HTTPException(status_code=400, detail=f"Failed to compress image: {str(e)}")
     
     # Verify product exists
     with get_conn() as conn:
@@ -497,12 +539,11 @@ async def upload_product_photo(product_id: int, file: UploadFile = File(...)) ->
             raise HTTPException(status_code=404, detail="Product not found")
     
     # Generate filename with product_id and timestamp
-    import uuid
-    file_ext = file.filename.split(".")[-1] if "." in file.filename else "jpg"
+    file_ext = "jpg" if len(contents) > max_size // 2 or file.content_type == "image/jpeg" else (file.filename.split(".")[-1] if "." in file.filename else "jpg")
     filename = f"product_{product_id}_{uuid.uuid4().hex}.{file_ext}"
     filepath = UPLOADS_DIR / filename
     
-    # Save file
+    # Save compressed file
     with open(filepath, "wb") as f:
         f.write(contents)
     
