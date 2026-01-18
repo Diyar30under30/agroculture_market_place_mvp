@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3e5e8;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-block {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature-number {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #d4a574;
+            min-width: 120px;
+        }
+
+        .feature-text {
+            font-size: 1.3rem;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .feature-block {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px;
+                gap: 15px;
+            }
+
+            .feature-number {
+                font-size: 3rem;
+            }
+
+            .feature-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="feature-block">
+            <div class="feature-number">01</div>
+            <div class="feature-text">Spot Trends in Seconds: No more digging through numbers.</div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-number">02</div>
+            <div class="feature-text">Get Everyone on the Same Page: Share easy-to-understand reports with your team.</div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-number">03</div>
+            <div class="feature-text">Make Presentations Pop: Interactive maps and dashboards keep your audience engaged.</div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-number">04</div>
+            <div class="feature-text">Your Global Snapshot: Get a quick, clear overview of your entire operation.</div>
+        </div>
+    </div>
+</body>
+</html>

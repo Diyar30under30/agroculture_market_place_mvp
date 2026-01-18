@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Marketplace</title>
+    <base href="/static/">
+    <link rel="stylesheet" href="gym.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <span>Torlik Market</span>
+            <nav>
+                <ul>
+                    <li><a class="listw" href="/">Home</a></li>
+                    <li><a class="listw" href="/about">About</a></li>
+                    <li><a class="listw" href="/storage">Storage</a></li>
+                    <li><a class="listw" href="/shop">Shop</a></li>
+                    <li><a class="listw" href="/admin" style="display:none">Admin</a></li>
+                    <li class="button"><a href="/profile">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <section class="api-panel">
+        <div class="api-grid">
+            <h1>Admin Panel</h1>
+
+            <!-- Users Section -->
+            <div class="admin-section">
+                <h2>Manage Users</h2>
+                <button onclick="loadAllUsers()">Load All Users</button>
+                <div id="users-container" class="admin-list"></div>
+            </div>
+
+            <!-- Products Section -->
+            <div class="admin-section">
+                <h2>Manage Products</h2>
+                <button onclick="loadAllProducts()">Load All Products</button>
+                <div id="products-container" class="admin-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="frontend/nav-helper.js"></script>
+    <script src="frontend/admin.js"></script>
+</body>
+</html>

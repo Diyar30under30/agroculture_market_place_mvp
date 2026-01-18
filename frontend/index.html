@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Market Mini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <header class="hero">
+      <div class="hero__inner">
+        <div>
+          <p class="eyebrow">Marketplace control</p>
+          <h1>Market Mini</h1>
+          <p class="lead">
+            Create profiles, add products, and browse inventory. Powered by your FastAPI backend.
+          </p>
+          <div class="pill-row">
+            <span class="pill">API: 127.0.0.1:8000</span>
+            <button id="refresh" class="ghost">Refresh all</button>
+          </div>
+        </div>
+        <div class="status-card">
+          <h3>Live status</h3>
+          <div class="status-line" id="status">Checking...</div>
+          <p class="hint">Start the backend with uvicorn and keep it running.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Create profile</h2>
+        <form id="profile-form" class="stack">
+          <label>
+            Name
+            <input name="name" required minlength="2" />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            Phone
+            <input name="phone" />
+          </label>
+          <label>
+            City
+            <input name="city" />
+          </label>
+          <label>
+            About
+            <textarea name="about" rows="3"></textarea>
+          </label>
+          <button type="submit">Create profile</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Create product</h2>
+        <form id="product-form" class="stack">
+          <label>
+            Owner profile id
+            <input name="owner_id" type="number" min="1" required />
+          </label>
+          <label>
+            Title
+            <input name="title" required minlength="2" />
+          </label>
+          <label>
+            Description
+            <textarea name="description" rows="3"></textarea>
+          </label>
+          <div class="split">
+            <label>
+              Price
+              <input name="price" type="number" min="0.01" step="0.01" required />
+            </label>
+            <label>
+              Currency
+              <input name="currency" maxlength="3" value="KZT" />
+            </label>
+          </div>
+          <label>
+            Quantity
+            <input name="quantity" type="number" min="1" value="1" />
+          </label>
+          <button type="submit">Create product</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Profiles</h2>
+        <div class="toolbar">
+          <input id="profile-id" type="number" min="1" placeholder="Profile id" />
+          <button id="fetch-profile" class="ghost">Load profile</button>
+        </div>
+        <div id="profile-details" class="empty">No profile loaded yet.</div>
+      </section>
+
+      <section class="card">
+        <h2>Products</h2>
+        <div class="toolbar">
+          <input id="owner-filter" type="number" min="1" placeholder="Owner id" />
+          <input id="search" type="text" minlength="2" placeholder="Search title" />
+          <button id="fetch-products" class="ghost">Filter</button>
+        </div>
+        <div id="products" class="list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Tip: use the profile id returned from Create profile to add products.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Torlik Market</title>
+    <base href="/static/">
+    <link rel="stylesheet" href="gym.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <span>Torlik Market</span>
+            <nav>
+                <ul>
+                    <li><a class="listw" href="/">Home</a></li>
+                    <li><a class="listw" href="/about">About</a></li>
+                    <li><a class="listw" href="/storage">Storage</a></li>
+                    <li><a class="listw" href="/shop">Shop</a></li>
+                    <li><a class="listw" href="/admin" style="display:none">Admin</a></li>
+                    <li class="button"><a href="/profile">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <section class="api-panel">
+        <div class="api-grid">
+            <div class="api-card">
+                <p class="api-eyebrow">Add product</p>
+                <h2>Sell with your profile</h2>
+                <p class="api-lead">Login first, then create a product linked to your account.</p>
+                <form id="product-form" class="api-stack">
+                    <label>
+                        Title
+                        <input name="title" required minlength="2" />
+                    </label>
+                    <label>
+                        Description
+                        <textarea name="description" rows="3"></textarea>
+                    </label>
+                    <div class="api-split">
+                        <label>
+                            Price
+                            <input name="price" type="number" min="0.01" step="0.01" required />
+                        </label>
+                        <label>
+                            Currency
+                            <input name="currency" maxlength="3" value="KZT" />
+                        </label>
+                    </div>
+                    <label>
+                        Quantity
+                        <input name="quantity" type="number" min="1" value="1" />
+                    </label>
+                    <label>
+                        Product Photo
+                        <input name="photo" type="file" accept="image/*" />
+                        <small>Optional. Accepted: JPG, PNG, WebP, GIF (max 5MB)</small>
+                        <img id="photo-preview" style="display:none; max-width: 200px; margin-top: 10px; border-radius: 8px;" />
+                    </label>
+                    <button type="submit" class="api-button">Create product</button>
+                </form>
+                <div id="product-result" class="api-empty"></div>
+            </div>
+
+            <div class="api-card api-wide">
+                <p class="api-eyebrow">Shop</p>
+                <h2>Products</h2>
+                <p class="api-lead">Browse the latest inventory.</p>
+                <div class="api-toolbar">
+                    <input id="owner-filter" type="number" min="1" placeholder="Owner id" />
+                    <input id="search" type="text" minlength="2" placeholder="Search title" />
+                    <button id="fetch-products" class="api-button ghost">Filter</button>
+                </div>
+                <div id="products" class="api-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="frontend/nav-helper.js"></script>
+    <script src="frontend/app.js"></script>
+</body>
+</html>
