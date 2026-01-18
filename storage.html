@@ -6,6 +6,7 @@
     <title>Storage - Torlik Market</title>
     <base href="/static/">
     <link rel="stylesheet" href="gym.css">
+    <link rel="stylesheet" href="frontend/lang.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
@@ -16,13 +17,18 @@
             <span>Torlik Market</span>
             <nav>
                 <ul>
-                    <li><a class="listw" href="/">Home</a></li>
-                    <li><a class="listw" href="/about">About</a></li>
-                    <li><a class="listw" href="/storage">Storage</a></li>
-                    <li><a class="listw" href="/shop">Shop</a></li>
-                    <li><a class="listw" href="/admin" style="display:none">Admin</a></li>
-                    <li class="button"><a href="/profile">Profile</a></li>
+                    <li><a class="listw" href="/" data-i18n="home">Home</a></li>
+                    <li><a class="listw" href="/about" data-i18n="about">About</a></li>
+                    <li><a class="listw" href="/storage" data-i18n="storage">Storage</a></li>
+                    <li><a class="listw" href="/shop" data-i18n="shop">Shop</a></li>
+                    <li><a class="listw" href="/admin" style="display:none" data-i18n="admin">Admin</a></li>
+                    <li class="button"><a href="/profile" data-i18n="profile">Profile</a></li>
                 </ul>
+                <div class="language-switcher">
+                    <button onclick="setLanguage('en')" class="lang-btn" id="lang-en">EN</button>
+                    <button onclick="setLanguage('ru')" class="lang-btn" id="lang-ru">РУ</button>
+                    <button onclick="setLanguage('kk')" class="lang-btn" id="lang-kk">ҚА</button>
+                </div>
             </nav>
         </header>
     </div>
@@ -76,7 +82,20 @@
         </div>
     </section>
 
+    <script src="frontend/lang.js"></script>
     <script src="frontend/nav-helper.js"></script>
     <script src="frontend/storage.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('lang-' + currentLanguage).classList.add('active');
+    });
+    const originalSetLanguage = window.setLanguage;
+    window.setLanguage = function(lang) {
+      originalSetLanguage(lang);
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('lang-' + currentLanguage).classList.add('active');
+    };
+    </script>
 </body>
 </html>
