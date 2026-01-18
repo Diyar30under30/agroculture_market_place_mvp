@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See the Big Picture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-soft: #ffd4d9;
+            --pink-light: #ffe8eb;
+            --cream: #f5f0eb;
+            --gold: #d4a574;
+            --text-dark: #2a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--cream) 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background stripes */
+        .background-stripes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .stripe {
+            position: absolute;
+            width: 120px;
+            height: 100%;
+            background: var(--white);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .stripe:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .stripe:nth-child(2) { left: 20%; animation-delay: -5s; }
+        .stripe:nth-child(3) { left: 35%; animation-delay: -10s; }
+        .stripe:nth-child(4) { left: 50%; animation-delay: -2s; }
+        .stripe:nth-child(5) { left: 65%; animation-delay: -7s; }
+        .stripe:nth-child(6) { left: 80%; animation-delay: -12s; }
+
+        @keyframes float {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            opacity: 0.75;
+            margin-bottom: 60px;
+            line-height: 1.6;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            padding: 35px 40px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.3s; }
+        .feature-item:nth-child(2) { animation-delay: 0.4s; }
+        .feature-item:nth-child(3) { animation-delay: 0.5s; }
+        .feature-item:nth-child(4) { animation-delay: 0.6s; }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px rgba(212, 165, 116, 0.15);
+        }
+
+        .feature-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            min-width: 60px;
+            line-height: 1;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: var(--gold);
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+            animation: fadeInUp 1s ease-out 0.7s both;
+            letter-spacing: 0.02em;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Decorative elements */
+        .decorative-circle {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .circle-1 {
+            top: -200px;
+            right: -200px;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            bottom: -250px;
+            left: -250px;
+            animation: pulse 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .container {
+                padding: 60px 24px;
+            }
+
+            .feature-item {
+                padding: 25px 30px;
+                gap: 20px;
+            }
+
+            .feature-number {
+                font-size: 1.5rem;
+                min-width: 45px;
+            }
+
+            .stripe {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-circle circle-1"></div>
+    <div class="decorative-circle circle-2"></div>
+    
+    <div class="background-stripes">
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+    </div>
+
+    <div class="container">
+        <h1>See the Big Picture</h1>
+        
+        <p class="subtitle">
+            Area turns your data into clear, vibrant visuals that show you exactly what's happening in each region.
+        </p>
+
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-number">01</div>
+                <div class="feature-content">
+                    <div class="feature-title">Spot Trends in Seconds: No more digging through numbers.</div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-number">02</div>
+                <div class="feature-content">
+                    <div class="feature-title">Get Everyone on the Same Page: Share easy-to-understand reports with your team.</div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-number">03</div>
+                <div class="feature-content">
+                    <div class="feature-title">Make Presentations Pop: Interactive maps and dashboards keep your audience engaged.</div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-number">04</div>
+                <div class="feature-content">
+                    <div class="feature-title">Your Global Snapshot: Get a quick, clear overview of your entire operation.</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="cta-button">Discover More</a>
+    </div>
+</body>
+</html>

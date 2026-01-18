@@ -1,0 +1,100 @@
+/* ========================================
+   CSS ДЛЯ АНИМАЦИИ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ
+   ======================================== */
+
+/* Плавная прокрутка для всей страницы */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Базовые стили для элементов до анимации */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+/* Стили после анимации */
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ДОПОЛНИТЕЛЬНЫЕ ВАРИАНТЫ АНИМАЦИЙ */
+
+/* Появление слева */
+.animate-from-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease-out;
+}
+
+.animate-from-left.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Появление справа */
+.animate-from-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s ease-out;
+}
+
+.animate-from-right.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Увеличение */
+.animate-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s ease-out;
+}
+
+.animate-scale.animated {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Поворот */
+.animate-rotate {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+    transition: all 0.8s ease-out;
+}
+
+.animate-rotate.animated {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+/* Размытие */
+.animate-blur {
+    opacity: 0;
+    filter: blur(10px);
+    transition: all 0.8s ease-out;
+}
+
+.animate-blur.animated {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* Задержки для последовательной анимации */
+.animate-delay-1 { transition-delay: 0.1s; }
+.animate-delay-2 { transition-delay: 0.2s; }
+.animate-delay-3 { transition-delay: 0.3s; }
+.animate-delay-4 { transition-delay: 0.4s; }
+.animate-delay-5 { transition-delay: 0.5s; }
+
+/* Стили для кнопки "Вверх" */
+.scroll-to-top:hover {
+    background: #555 !important;
+    transform: translateY(-5px);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-2px);
+}

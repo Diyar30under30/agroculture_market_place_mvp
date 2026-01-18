@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Torlik Market</title>
+    <base href="/static/">
+    <link rel="stylesheet" href="gym.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <span>Torlik Market</span>
+            <nav>
+                <ul>
+                    <li><a class="listw" href="/">Home</a></li>
+                    <li><a class="listw" href="/products">Shop</a></li>
+                    <li class="button"><a href="/profile">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <section class="api-panel">
+        <div class="api-grid">
+            <div class="api-card">
+                <p class="api-eyebrow">Account</p>
+                <h2>Create account</h2>
+                <p class="api-lead">Register with your email and password.</p>
+                <form id="register-form" class="api-stack">
+                    <label>
+                        Name
+                        <input name="name" required minlength="2" />
+                    </label>
+                    <label>
+                        Email
+                        <input name="email" type="email" required />
+                    </label>
+                    <label>
+                        Password
+                        <input name="password" type="password" minlength="6" required />
+                    </label>
+                    <button type="submit" class="api-button">Register</button>
+                </form>
+                <div id="register-result" class="api-empty"></div>
+            </div>
+
+            <div class="api-card">
+                <p class="api-eyebrow">Access</p>
+                <h2>Login</h2>
+                <p class="api-lead">No sessions yet, just credential check.</p>
+                <form id="login-form" class="api-stack">
+                    <label>
+                        Email
+                        <input name="email" type="email" required />
+                    </label>
+                    <label>
+                        Password
+                        <input name="password" type="password" minlength="6" required />
+                    </label>
+                    <button type="submit" class="api-button">Login</button>
+                </form>
+                <div id="login-result" class="api-empty"></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="profile.js"></script>
+</body>
+</html>
